@@ -33,3 +33,28 @@ func Create(conn *zk.Conn, path string, data []byte,flags int32 )string {
 	fmt.Println("create:",val)
 	return  val
 }
+
+func GetChildren(conn *zk.Conn, path string)([]string, *zk.Stat, error)   {
+	fmt.Println("getChilren:")
+	return conn.Children(path)
+}
+
+func Delete(conn *zk.Conn, path string) error {
+     fmt.Println("Delete:%s",path)
+	return conn.Delete(path,0)
+}
+
+func  Get(conn *zk.Conn,path string)([]byte, *zk.Stat, error){
+	fmt.Println("get data :%s\n",path)
+	return  conn.Get(path)
+}
+
+func Exist(conn *zk.Conn,path string)(bool, *zk.Stat, error)  {
+	fmt.Println("node exist:%s",path)
+	return conn.Exists(path)
+}
+
+func Update(conn *zk.Conn,path string,data []byte,version  int32)(*zk.Stat, error)  {
+	fmt.Println("update node:%s\t%s",path,string(data))
+	return conn.Set(path,data,version)
+}
